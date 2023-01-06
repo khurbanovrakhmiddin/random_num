@@ -2,8 +2,8 @@ import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:untitled13/number/api_number.dart';
-import 'package:untitled13/random_trivia/random_screen.dart';
+import 'package:random_num/number/api_number.dart';
+import 'package:random_num/random_trivia/random_screen.dart';
 
 import 'number/number_screen.dart';
 
@@ -23,11 +23,18 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       initialRoute: '/',
-      routes: {
-        '/': (context) => MyHomePage(),
-        '/num': (context) => Number(),
-        '/random': (context) => RandomScrren(),
-      },
+      onGenerateRoute: (RouteSettings settings) {
+      print('build route for ${settings.name}');
+      var routes = <String, WidgetBuilder>{
+
+        '/': (context) => const MyHomePage(),
+        '/num': (context) =>  Number(args: settings.arguments),
+        '/random': (context) => const RandomScrren(),
+
+      };
+      WidgetBuilder? builder = routes[settings.name];
+      return MaterialPageRoute(builder: (ctx) => builder!(ctx));
+    },
     );
   }
 }
@@ -46,11 +53,14 @@ class MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
         body: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Padding(
           padding: const EdgeInsets.all(50.0),
           child: TextFormField(
+
             controller: numController,
+
             keyboardType: TextInputType.number,
             inputFormatters: <TextInputFormatter>[
               FilteringTextInputFormatter.digitsOnly
@@ -64,16 +74,22 @@ class MyHomePageState extends State<MyHomePage> {
         ),
         TextButton(
             onPressed: () {
-              Navigator.pushNamed(context, '/num',
-                  arguments: {"number": numController.text.toString()});
+
+              if(numController.text.isNotEmpty){
+
+                Navigator.pushNamed(context, '/num',
+
+                    arguments: {"number": numController.text.toString()});
+              }
+
             },
-            child: Text('Отримати факт')),
+            child: const Text('Отримати факт')),
         TextButton(
             onPressed: () {
               Navigator.pushNamed(context, '/random');
             },
-            child: Text('Отримати факт про випадкове число')),
-        Card(),
+            child: const Text('Отримати факт про випадкове число')),
+        const Card(),
       ],
     ));
   }

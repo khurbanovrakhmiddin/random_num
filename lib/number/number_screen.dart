@@ -1,10 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:untitled13/number/api_number.dart';
-import 'package:untitled13/main.dart';
+import 'package:random_num/number/api_number.dart';
+import 'package:random_num/main.dart';
 
 class Number extends StatefulWidget {
-  const Number({Key? key}) : super(key: key);
+  final Object? args;
+  const Number({Key? key, required this.args}) : super(key: key);
 
   @override
   State<Number> createState() => _NumberState();
@@ -15,20 +16,26 @@ class _NumberState extends State<Number> {
 
   @override
   void initState() {
+
     super.initState();
+    Map? args = widget.args as Map;
+    getData(args["number"]);
+
   }
 
   void getData(String number) async {
     int res = int.parse(number);
     var result = await ApiNumber().getHttp(res);
-    setState(() {
       data = result;
-    });
+      setState(() {
+
+      });
   }
 
+
+  @override
   Widget build(BuildContext context) {
-    Map? args = ModalRoute.of(context)!.settings.arguments as Map;
-    getData(args["number"]);
+
     return Scaffold(
       body: Center(
         child: Column(

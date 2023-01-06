@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:untitled13/random_trivia/random_api.dart';
+import 'package:random_num/random_trivia/random_api.dart';
 
 class RandomScrren extends StatefulWidget {
   const RandomScrren({Key? key}) : super(key: key);
@@ -25,6 +25,7 @@ class _RandomScrrenState extends State<RandomScrren> {
     });
   }
 
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
@@ -33,7 +34,7 @@ class _RandomScrrenState extends State<RandomScrren> {
           children: [
             Text(
               data,
-              style: TextStyle(fontSize: 35),
+              style:const TextStyle(fontSize: 35),
             ),
           ],
         ),
