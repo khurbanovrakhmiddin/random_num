@@ -25,10 +25,9 @@ class _NumberState extends State<Number> {
 
   void getData(String number) async {
     int res = int.parse(number);
-    var result = await ApiNumber().getHttp(res);
+    var result = await ApiNumber.getHttp(res);
       data = result;
       setState(() {
-
       });
   }
 
@@ -37,15 +36,20 @@ class _NumberState extends State<Number> {
   Widget build(BuildContext context) {
 
     return Scaffold(
-      body: Center(
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Text(
-              data,
-              style: TextStyle(fontSize: 35),
-            ),
-          ],
+      appBar: AppBar(),
+
+      body: Padding(
+        padding:const EdgeInsets.symmetric(horizontal: 20),
+        child: Center(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Text(
+                data,
+                style: const TextStyle(fontSize: 35),
+              ),
+            ],
+          ),
         ),
       ),
     );

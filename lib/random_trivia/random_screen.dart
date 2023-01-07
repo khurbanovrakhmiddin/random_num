@@ -19,7 +19,7 @@ class _RandomScrrenState extends State<RandomScrren> {
   }
 
   void getData() async {
-    var result = await ApiRandom().getHttp();
+    var result = await ApiRandom.getHttp();
     setState(() {
       data = result;
     });
@@ -28,15 +28,19 @@ class _RandomScrrenState extends State<RandomScrren> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(),
       body: Center(
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Text(
-              data,
-              style:const TextStyle(fontSize: 35),
-            ),
-          ],
+        child: Padding(
+          padding:const EdgeInsets.symmetric(horizontal: 20),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Text(
+                data,
+                style:const TextStyle(fontSize: 35),
+              ),
+            ],
+          ),
         ),
       ),
     );
