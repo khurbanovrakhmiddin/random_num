@@ -5,6 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:random_num/number/api_number.dart';
 import 'package:random_num/random_trivia/random_screen.dart';
 
+import 'bottomSheet/page.dart';
 import 'home.dart';
 import 'number/number_screen.dart';
 
@@ -23,12 +24,13 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      initialRoute: '/',
+      initialRoute: '/s',
       onGenerateRoute: (RouteSettings settings) {
       print('build route for ${settings.name}');
       var routes = <String, WidgetBuilder>{
 
         '/': (context) => const MyHomePage(),
+        '/s': (context) => const Widdddd(),
         '/num': (context) =>  Number(args: settings.arguments),
         '/random': (context) => const RandomScrren(),
 
